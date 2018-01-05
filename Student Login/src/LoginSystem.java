@@ -4,21 +4,54 @@ import java.util.Scanner;
 public class LoginSystem {
 
 	public static final File database = new File("database.txt");
-	
+
 	public static final Scanner userInput = new Scanner(System.in);
-	
-	
-	//Ask the user if they are registered.
-	public static void main(String[] args) {
-		
+
+	// Ask the user if they are registered.
+	public static void main(final String[] args) {
+
+		if (!database.exists()) {
+			System.out.println("The database.txt file does not exist. Registering first user...");
+			registerUser();
+		}
+
+		while (userInput.hasNext()) {
+
+			System.out.println("Would you like to login or register a user?");
+
+			String input = userInput.next().trim().toLowerCase();
+
+			if (input.equalsIgnoreCase("end") || input.equalsIgnoreCase("exit")) {
+				System.out.println("Exiting...");
+				System.exit(0);
+			}
+
+			if (input.contains("log")) {
+				login();
+			} else if (input.contains("reg") || input.contains("add")) {
+				registerUser();
+			} else {
+				System.out.println("Sorry, input not valid. Please type either \"register\" or \"login\".");
+			}
+
+		}
 
 	}
 
-	public void registerUser() {}
-	
-	
-	public boolean isInDataBase(String name, int id) {
-		
+	private static void prompt(final String prompt) {
+		System.out.print(prompt);
 	}
-	
+
+	public static void registerUser() {
+
+	}
+
+	public static void login() {
+		prompt("Please enter your username: ");
+		String username = userInput.next().trim();
+
+		prompt("Please enter your id number: ");
+		int id = userInput.nextInt();
+	}
+
 }
