@@ -1,4 +1,4 @@
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
 
 public class LoginSystem {
@@ -43,7 +43,17 @@ public class LoginSystem {
 	}
 
 	public static void registerUser() {
-
+		PrintWriter outputFile = new PrintWriter("database.txt");
+		
+		prompt("Please enter your username for the database: ");
+		String username = userInput.nextLine();
+		outputFile.println(username);
+		
+		prompt("Please enter your ID for the database: ");
+		int id = userInput.nextInt();
+		outputFile.println(id);
+		
+		outputFile.close();
 	}
 
 	public static void login() {
